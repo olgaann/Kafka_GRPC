@@ -1,0 +1,5 @@
+grpc:
+  client:
+    GLOBAL:
+      address: localhost:8980
+      negotiation-type: plaintext
