@@ -17,7 +17,7 @@ message GetRandomTaskResponse {
   string title = 1;
 }
 
-service GreetingService {
+service TaskEmployeeGrpcService {
   rpc greeting(HelloRequest) returns (HelloResponse);
   rpc getRandomTask(GetRandomTaskRequest) returns (GetRandomTaskResponse);
 }

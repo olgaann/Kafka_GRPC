@@ -6,7 +6,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.aston.bochkareva.dto.CreateEmployeeDto;
 import ru.aston.bochkareva.service.EmployeeService;
-import ru.aston.bochkareva.service.GreetingService;
+import ru.aston.bochkareva.service.TaskEmployeeGrpcService;
+
 
 @RestController
 @RequestMapping("/employee")
@@ -14,21 +15,20 @@ import ru.aston.bochkareva.service.GreetingService;
 public class EmployeeController {
 
     private final EmployeeService employeeService;
-    private final GreetingService greetingService;
+    private final TaskEmployeeGrpcService taskEmployeeGrpcService;
     @PostMapping
     public ResponseEntity<String> createEmployee(@RequestBody CreateEmployeeDto createEmployeeDto) {
         String employeeData = employeeService.createEmployee(createEmployeeDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(String.format("New employee %s created", employeeData));
     }
 
-    @GetMapping("/")
-    public String test() {
-        greetingService.test();
-        return "ok";
+    @GetMapping("/hello")
+    public String sayHello() {
+        return taskEmployeeGrpcService.sayHello();
     }
 
     @GetMapping("/task")
     public String getRandomTask() {
-        return greetingService.getRandomTask();
+        return taskEmployeeGrpcService.getRandomTask();
     }
 }
