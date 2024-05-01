@@ -19,4 +19,14 @@ public class GreetingServiceImpl extends GreetingServiceGrpc.GreetingServiceImpl
         responseObserver.onCompleted();
     }
 
+    @Override
+    public void getRandomTask(GreetingServiceOuterClass.GetRandomTaskRequest request, StreamObserver<GreetingServiceOuterClass.GetRandomTaskResponse> responseObserver) {
+        GreetingServiceOuterClass.GetRandomTaskResponse response= GreetingServiceOuterClass
+                .GetRandomTaskResponse
+                .newBuilder()
+                        .setTitle("random task")
+                                .build();
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
+    }
 }

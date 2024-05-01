@@ -26,4 +26,9 @@ public class EmployeeController {
         greetingService.test();
         return "ok";
     }
+
+    @GetMapping("/task")
+    public String getRandomTask() {
+        return greetingService.getRandomTask();
+    }
 }

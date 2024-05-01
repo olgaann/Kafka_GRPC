@@ -10,6 +10,14 @@ message HelloResponse {
   string greeting = 1;
 }
 
+message GetRandomTaskRequest {
+}
+
+message GetRandomTaskResponse {
+  string title = 1;
+}
+
 service GreetingService {
   rpc greeting(HelloRequest) returns (HelloResponse);
+  rpc getRandomTask(GetRandomTaskRequest) returns (GetRandomTaskResponse);
 }

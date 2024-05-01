@@ -25,4 +25,12 @@ public class GreetingService {
         System.out.println(response.getGreeting());
 
     }
+
+    public String getRandomTask() {
+        GreetingServiceOuterClass.GetRandomTaskRequest request = GreetingServiceOuterClass
+                .GetRandomTaskRequest.newBuilder().build();
+        GreetingServiceOuterClass.GetRandomTaskResponse response = stub.getRandomTask(request);
+        System.out.println(response.getTitle());
+        return response.getTitle();
+    }
 }
