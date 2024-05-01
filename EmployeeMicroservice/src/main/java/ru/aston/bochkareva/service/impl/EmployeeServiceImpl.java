@@ -1,4 +1,4 @@
-package ru.aston.bochkareva.service;
+package ru.aston.bochkareva.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -12,6 +12,7 @@ import ru.aston.bochkareva.entity.Employee;
 import ru.aston.bochkareva.exception.CustomKafkaException;
 import ru.aston.bochkareva.mapper.EmployeeMapper;
 import ru.aston.bochkareva.repository.EmployeeRepository;
+import ru.aston.bochkareva.service.EmployeeService;
 
 @Service
 @RequiredArgsConstructor

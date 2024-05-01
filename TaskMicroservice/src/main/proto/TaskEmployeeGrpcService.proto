@@ -10,14 +10,15 @@ message HelloResponse {
   string greeting = 1;
 }
 
-message GetRandomTaskRequest {
+message GetTaskListRequest {
+  int32 size = 1;
 }
 
-message GetRandomTaskResponse {
-  string title = 1;
+message GetTaskListResponse {
+  repeated string tasks = 1;
 }
 
 service TaskEmployeeGrpcService {
   rpc greeting(HelloRequest) returns (HelloResponse);
-  rpc getRandomTask(GetRandomTaskRequest) returns (GetRandomTaskResponse);
+  rpc getTaskList(GetTaskListRequest) returns (GetTaskListResponse);
 }

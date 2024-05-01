@@ -6,6 +6,7 @@ import ru.aston.bochkareva.entity.Task;
 import ru.aston.bochkareva.repository.TaskRepository;
 import ru.aston.bochkareva.service.TaskService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -22,4 +23,17 @@ public class TaskServiceImpl implements TaskService {
         int randomNumber = random.nextInt(taskList.size());
         return taskList.get(randomNumber);
     }
+
+    @Override
+    public List<String> getListRandomTaskNames(int size) {
+        List<Task> taskList = taskRepository.findAll();
+        List<String> taskNames = new ArrayList<>();
+        for (int i = 0; i < size; i++) {
+            int randomNumber = random.nextInt(taskList.size());
+            taskNames.add(taskList.get(randomNumber).getTitle());
+        }
+        return taskNames;
+    }
+
+
 }

@@ -2,7 +2,7 @@ package ru.aston.bochkareva.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.aston.bochkareva.EmployeeCreatedEvent;
+import ru.aston.bochkareva.dto.EmployeeCreatedEvent;
 import ru.aston.bochkareva.entity.Employee;
 import ru.aston.bochkareva.entity.Task;
 import ru.aston.bochkareva.repository.EmployeeRepository;

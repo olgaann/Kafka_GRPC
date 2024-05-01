@@ -1,9 +1,11 @@
-package ru.aston.bochkareva.service;
+package ru.aston.bochkareva.service.impl;
 
 import com.example.grpc.TaskEmployeeGrpcServiceGrpc;
 import com.example.grpc.TaskEmployeeGrpcServiceOuterClass;
 import net.devh.boot.grpc.client.inject.GrpcClient;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class TaskEmployeeGrpcService {
@@ -12,20 +14,17 @@ public class TaskEmployeeGrpcService {
     private TaskEmployeeGrpcServiceGrpc.TaskEmployeeGrpcServiceBlockingStub stub;
 
     public String sayHello() {
-
         TaskEmployeeGrpcServiceOuterClass.HelloRequest request = TaskEmployeeGrpcServiceOuterClass.HelloRequest.newBuilder()
                 .setName("EmployeeMicroservice")
                 .build();
-
         TaskEmployeeGrpcServiceOuterClass.HelloResponse response = stub.greeting(request);
         return response.getGreeting();
     }
 
-    public String getRandomTask() {
-        TaskEmployeeGrpcServiceOuterClass.GetRandomTaskRequest request = TaskEmployeeGrpcServiceOuterClass
-                .GetRandomTaskRequest.newBuilder().build();
-        TaskEmployeeGrpcServiceOuterClass.GetRandomTaskResponse response = stub.getRandomTask(request);
-        System.out.println(response.getTitle());
-        return response.getTitle();
+    public List<String> getTaskList(int size) {
+        TaskEmployeeGrpcServiceOuterClass.GetTaskListRequest request = TaskEmployeeGrpcServiceOuterClass.GetTaskListRequest
+                .newBuilder().setSize(size).build();
+        TaskEmployeeGrpcServiceOuterClass.GetTaskListResponse response = stub.getTaskList(request);
+        return response.getTasksList();
     }
 }

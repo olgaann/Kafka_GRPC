@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.kafka.annotation.KafkaHandler;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
-import ru.aston.bochkareva.EmployeeCreatedEvent;
+import ru.aston.bochkareva.dto.EmployeeCreatedEvent;
 import ru.aston.bochkareva.service.EmployeeService;
 
 @Component

@@ -6,7 +6,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.aston.bochkareva.dto.CreateEmployeeDto;
 import ru.aston.bochkareva.service.EmployeeService;
-import ru.aston.bochkareva.service.TaskEmployeeGrpcService;
+import ru.aston.bochkareva.service.impl.TaskEmployeeGrpcService;
+
+import java.util.List;
 
 
 @RestController
@@ -27,8 +29,8 @@ public class EmployeeController {
         return taskEmployeeGrpcService.sayHello();
     }
 
-    @GetMapping("/task")
-    public String getRandomTask() {
-        return taskEmployeeGrpcService.getRandomTask();
+    @GetMapping("/taskList/{size}")
+    public List<String> getTaskList(@PathVariable("size") int size) {
+        return taskEmployeeGrpcService.getTaskList(size);
     }
 }
