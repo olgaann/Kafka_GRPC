@@ -1,12 +1,13 @@
 package ru.aston.bochkareva.service;
 
 import lombok.extern.slf4j.Slf4j;
-import ru.aston.bochkareva.core.EmployeeCreatedEvent;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Service;
 import ru.aston.bochkareva.dto.CreateEmployeeDto;
+import ru.aston.bochkareva.dto.EmployeeCreatedEvent;
 import ru.aston.bochkareva.entity.Employee;
 import ru.aston.bochkareva.exception.CustomKafkaException;
 import ru.aston.bochkareva.mapper.EmployeeMapper;

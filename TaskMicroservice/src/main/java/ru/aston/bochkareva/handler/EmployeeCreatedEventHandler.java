@@ -1,11 +1,12 @@
 package ru.aston.bochkareva.handler;
 
 import lombok.extern.slf4j.Slf4j;
-import ru.aston.bochkareva.core.EmployeeCreatedEvent;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.kafka.annotation.KafkaHandler;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
+import ru.aston.bochkareva.EmployeeCreatedEvent;
 import ru.aston.bochkareva.service.EmployeeService;
 
 @Component

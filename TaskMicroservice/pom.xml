@@ -63,11 +63,11 @@
 			<scope>runtime</scope>
 		</dependency>
 
-		<dependency>
-			<groupId> ru.aston.bochkareva.core</groupId>
-			<artifactId>core</artifactId>
-			<version>1.1.1-SNAPSHOT</version>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId> ru.aston.bochkareva.core</groupId>-->
+<!--			<artifactId>core</artifactId>-->
+<!--			<version>1.1.1-SNAPSHOT</version>-->
+<!--		</dependency>-->
 
 		<dependency>
 			<groupId>javax.annotation</groupId>

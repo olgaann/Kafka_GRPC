@@ -15,6 +15,7 @@ import org.springframework.kafka.listener.DefaultErrorHandler;
 import org.springframework.kafka.support.serializer.ErrorHandlingDeserializer;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
 import org.springframework.kafka.support.serializer.JsonSerializer;
+import ru.aston.bochkareva.EmployeeCreatedEvent;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,7 +27,7 @@ public class KafkaConfig {
     Environment environment;
 
     @Bean
-    ConsumerFactory<String, Object> consumerFactory() {
+    ConsumerFactory<String, EmployeeCreatedEvent> consumerFactory() {
         Map<String, Object> config = new HashMap<>();
         config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,
                 environment.getProperty("spring.kafka.consumer.bootstrap-servers"));
@@ -38,18 +39,32 @@ public class KafkaConfig {
         config.put(JsonDeserializer.TRUSTED_PACKAGES, environment.getProperty("spring.kafka.consumer.properties.spring.json.trusted.packages"));
         config.put(ConsumerConfig.GROUP_ID_CONFIG, environment.getProperty("spring.kafka.consumer.group-id"));
 
-        return new DefaultKafkaConsumerFactory<>(config);
+
+        JsonDeserializer<EmployeeCreatedEvent> deserializer =
+                new JsonDeserializer<>(EmployeeCreatedEvent.class,false);
+
+        return new DefaultKafkaConsumerFactory<>(config, new StringDeserializer(), deserializer);
+
+
     }
 
     @Bean
-    ConcurrentKafkaListenerContainerFactory<String, Object> kafkaListenerContainerFactory(
-            ConsumerFactory<String, Object> consumerFactory, KafkaTemplate kafkaTemplate) {
-        DefaultErrorHandler errorHandler = new DefaultErrorHandler(new DeadLetterPublishingRecoverer(kafkaTemplate));
-        ConcurrentKafkaListenerContainerFactory<String, Object> factory = new ConcurrentKafkaListenerContainerFactory<>();
-        factory.setConsumerFactory(consumerFactory);
-        factory.setCommonErrorHandler(errorHandler);
+    public ConcurrentKafkaListenerContainerFactory<String, EmployeeCreatedEvent> kafkaListenerContainerFactory() {
+        ConcurrentKafkaListenerContainerFactory<String, EmployeeCreatedEvent> factory =
+                new ConcurrentKafkaListenerContainerFactory<>();
+        factory.setConsumerFactory(consumerFactory());
         return factory;
     }
+
+//    @Bean
+//    ConcurrentKafkaListenerContainerFactory<String, Object> kafkaListenerContainerFactory(
+//            ConsumerFactory<String, Object> consumerFactory, KafkaTemplate kafkaTemplate) {
+//        DefaultErrorHandler errorHandler = new DefaultErrorHandler(new DeadLetterPublishingRecoverer(kafkaTemplate));
+//        ConcurrentKafkaListenerContainerFactory<String, Object> factory = new ConcurrentKafkaListenerContainerFactory<>();
+//        factory.setConsumerFactory(consumerFactory);
+//        factory.setCommonErrorHandler(errorHandler);
+//        return factory;
+//    }
 
     //эти три бина нужны, чтобы создать producer внутри нашего consumer, чтобы необработанные (ошибочные)
     //cообщения пересылать в отдельный топик

@@ -1,6 +1,6 @@
 package ru.aston.bochkareva.config;
 
-import ru.aston.bochkareva.core.EmployeeCreatedEvent;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.env.Environment;
 import org.apache.kafka.clients.admin.NewTopic;
@@ -13,6 +13,7 @@ import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
 import org.springframework.kafka.support.serializer.JsonSerializer;
+import ru.aston.bochkareva.dto.EmployeeCreatedEvent;
 
 import java.util.HashMap;
 import java.util.Map;

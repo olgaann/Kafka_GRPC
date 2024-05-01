@@ -76,11 +76,11 @@
 			<version>${org.mapstruct.version}</version>
 		</dependency>
 
-		<dependency>
-			<groupId> ru.aston.bochkareva.core</groupId>
-			<artifactId>core</artifactId>
-			<version>1.1.1-SNAPSHOT</version>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId> ru.aston.bochkareva.core</groupId>-->
+<!--			<artifactId>core</artifactId>-->
+<!--			<version>1.1.1-SNAPSHOT</version>-->
+<!--		</dependency>-->
 
 		<dependency> <!-- necessary for Java 9+ -->
 			<groupId>org.apache.tomcat</groupId>
