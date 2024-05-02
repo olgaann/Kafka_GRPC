@@ -1,8 +1,8 @@
 package ru.aston.bochkareva.service;
 
 
-import ru.aston.bochkareva.dto.EmployeeCreatedEvent;
+import ru.aston.bochkareva.dto.CreateEmployeeDto;
 
 public interface EmployeeService {
-    String createEmployee(EmployeeCreatedEvent employeeCreatedEvent);
+    String createEmployee(CreateEmployeeDto createEmployeeDto);
 }

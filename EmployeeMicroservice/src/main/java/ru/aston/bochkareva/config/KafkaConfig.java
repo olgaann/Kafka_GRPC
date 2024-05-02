@@ -2,7 +2,7 @@ package ru.aston.bochkareva.config;
 
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.core.env.Environment;
+import org.springframework.beans.factory.annotation.Value;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
@@ -13,7 +13,8 @@ import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
 import org.springframework.kafka.support.serializer.JsonSerializer;
-import ru.aston.bochkareva.dto.EmployeeCreatedEvent;
+import ru.aston.bochkareva.dto.CreateEmployeeDto;
+
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,25 +23,29 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class KafkaConfig {
 
-    private final Environment environment;
+    @Value("${spring.kafka.producer.bootstrap-servers}")
+    private String bootstrapServers;
+
+    @Value("${spring.kafka.producer.properties.enable.idempotence}")
+    private boolean idempotence;
 
     Map<String, Object> producerConfig() {
         Map<String, Object> config = new HashMap<>();
-        config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, environment.getProperty("spring.kafka.producer.bootstrap-servers"));
+        config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,bootstrapServers);
         config.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
         config.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
-        config.put(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, environment.getProperty("spring.kafka.producer.properties.enable.idempotence"));
+        config.put(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, idempotence);
         return config;
     }
 
     @Bean
-    ProducerFactory<String, EmployeeCreatedEvent> producerFactory() {
+    ProducerFactory<String, CreateEmployeeDto> producerFactory() {
         return new DefaultKafkaProducerFactory<>(producerConfig());
     }
 
     @Bean
-    KafkaTemplate<String, EmployeeCreatedEvent> kafkaTemplate2() {
-        return new KafkaTemplate<String, EmployeeCreatedEvent>(producerFactory());
+    KafkaTemplate<String, CreateEmployeeDto> kafkaTemplate() {
+        return new KafkaTemplate<String, CreateEmployeeDto>(producerFactory());
     }
 
     @Bean
